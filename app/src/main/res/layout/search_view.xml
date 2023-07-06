@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SearchView android:layout_width="match_parent"
+    android:layout_height="@dimen/xl"
+    android:iconifiedByDefault="false"
+    android:queryHint="Search News..."
+    android:id="@+id/searchView"
+    android:focusedByDefault="false"
+    
+    xmlns:android="http://schemas.android.com/apk/res/android" />

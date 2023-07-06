@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <include
+        android:id="@+id/progressBar"
+        layout="@layout/progress_bar"
+        android:visibility="invisible"
+        tools:layout_editor_absoluteX="15dp"
+        tools:layout_editor_absoluteY="15dp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/sm">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/mid"
+            app:cardElevation="@dimen/xxs"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.742"
+            app:strokeColor="@color/stroke"
+            app:strokeWidth="1dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingHorizontal="@dimen/xs"
+                android:gravity="center">
+
+                <EditText
+                    android:id="@+id/text_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/xl"
+                    android:layout_marginBottom="@dimen/xs"
+                    android:backgroundTint="@color/stroke"
+                    android:ems="10"
+                    android:hint="@string/text_username"
+                    android:inputType="text"
+                    android:padding="@dimen/xs"
+                    android:autofillHints="name" />
+
+                <EditText
+                    android:id="@+id/text_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/xl"
+                    android:layout_marginBottom="@dimen/xs"
+                    android:backgroundTint="@color/stroke"
+                    android:ems="10"
+                    android:hint="@string/text_email"
+                    android:inputType="textEmailAddress"
+                    android:padding="@dimen/xs"
+                    android:autofillHints="email" />
+
+                <Button
+                    android:id="@+id/button_submit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/primary"
+                    android:enabled="false"
+                    app:iconGravity="textEnd"
+                    android:text="@string/button_submit"
+                    app:icon="@drawable/baseline_check_24" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/xl"
+                    android:baselineAligned="false"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <Button
+                        android:id="@+id/button_google"
+                        android:layout_width="@dimen/ns"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="@string/text_google"
+                        android:layout_margin="@dimen/xxs" />
+
+                    <Button
+                        android:id="@+id/button_facebook"
+                        android:layout_width="@dimen/ns"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+
+                        android:layout_weight="1"
+                        android:text="@string/text_facebook"
+                        android:layout_margin="@dimen/xxs" />
+
+                    <Button
+                        android:id="@+id/button_apple"
+                        android:layout_width="@dimen/ns"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+
+                        android:layout_weight="1"
+                        android:text="@string/text_apple"
+                        android:layout_margin="@dimen/xxs" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

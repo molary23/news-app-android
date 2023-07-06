@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/xs"
+    app:cardElevation="@dimen/xs"
+    app:strokeColor="@color/stroke"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/xs"
+        android:weightSum="4">
+
+        <TextView
+            android:id="@+id/post_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/xs"
+            android:textSize="@dimen/xtitle"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/post_image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginBottom="@dimen/xs"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/dummy_image" />
+
+        <TextView
+            android:id="@+id/post_source"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/stitle"
+            android:textStyle="italic" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/xs"
+            android:weightSum="3">
+
+            <ImageButton
+                android:id="@+id/btn_open"
+                android:layout_width="@dimen/md"
+                android:layout_height="@dimen/md"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/open_post"
+                android:foreground="@drawable/baseline_open_in_browser_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/btn_share"
+                android:layout_width="@dimen/md"
+                android:layout_height="@dimen/md"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/share_post"
+                android:foreground="@drawable/outline_share_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btn_remove"
+                app:layout_constraintStart_toEndOf="@+id/btn_open"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/btn_remove"
+                android:layout_width="@dimen/md"
+                android:layout_height="@dimen/md"
+                android:layout_gravity="center|center_horizontal|center_vertical"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/btn_remove"
+                android:foreground="@drawable/outline_bookmark_remove_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

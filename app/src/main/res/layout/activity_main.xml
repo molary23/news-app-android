@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:id="@+id/rootView"
+    android:focusableInTouchMode="true">
+
+    <include
+        android:id="@+id/progressBar"
+        layout="@layout/progress_bar"
+        android:visibility="invisible"
+        tools:layout_editor_absoluteX="15dp"
+        tools:layout_editor_absoluteY="15dp" />
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/xxs">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="7">
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_general"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/sm"
+                android:backgroundTint="@color/primary"
+                android:padding="@dimen/xs"
+                android:text="@string/btn_general"
+                app:icon="@drawable/outline_featured_play_list_24"
+                app:iconGravity="start"
+                app:strokeColor="@color/primary"
+                app:strokeWidth="1dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_business"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/sm"
+                android:padding="@dimen/xs"
+                android:text="@string/btn_business"
+                app:icon="@drawable/outline_payments_24"
+                app:iconGravity="start"
+                android:backgroundTint="@color/primary"
+                app:strokeColor="@color/primary"
+                app:strokeWidth="1dp" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/sm"
+                android:id="@+id/btn_health"
+                android:padding="@dimen/xs"
+                android:text="@string/btn_health"
+                app:icon="@drawable/outline_biotech_24"
+                app:iconGravity="start"
+                android:backgroundTint="@color/primary"
+                app:strokeColor="@color/primary"
+                app:strokeWidth="1dp" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/sm"
+                android:id="@+id/btn_technology"
+                android:padding="@dimen/xs"
+                android:text="@string/btn_technology"
+                app:icon="@drawable/outline_laptop_mac_24"
+                app:iconGravity="start"
+                android:backgroundTint="@color/primary"
+                app:strokeColor="@color/primary"
+                app:strokeWidth="1dp" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/sm"
+                android:id="@+id/btn_entertainment"
+                android:padding="@dimen/xs"
+                android:text="@string/btn_entertainment"
+                app:icon="@drawable/baseline_theater_comedy_24"
+                app:iconGravity="start"
+                android:backgroundTint="@color/primary"
+                app:strokeColor="@color/primary"
+                app:strokeWidth="1dp" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/sm"
+                android:id="@+id/btn_science"
+                android:padding="@dimen/xs"
+                android:text="@string/btn_science"
+                app:icon="@drawable/outline_science_24"
+                app:iconGravity="start"
+                android:backgroundTint="@color/primary"
+                app:strokeColor="@color/primary"
+                app:strokeWidth="1dp" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_sport"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/sm"
+                android:backgroundTint="@color/primary"
+                android:padding="@dimen/xs"
+                android:text="@string/btn_sport"
+                app:icon="@drawable/outline_sports_football_24"
+                app:iconGravity="start"
+                app:strokeColor="@color/primary"
+                app:strokeWidth="1dp" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:cardElevation="@dimen/xs">
+
+        <include
+            android:id="@+id/searchView"
+            layout="@layout/search_view" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <include
+        android:id="@+id/recycleView"
+        layout="@layout/recycler_view" />
+
+</LinearLayout>
