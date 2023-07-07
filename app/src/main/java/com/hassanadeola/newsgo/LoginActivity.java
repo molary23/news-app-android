@@ -27,10 +27,6 @@ import com.hassanadeola.newsgo.Models.FBQueries;
 public class LoginActivity extends AppCompatActivity {
     private EditText username, email;
     private Button btn_submit, btn_google, btn_apple, btn_facebook;
-    //  private SQLiteDatabase db = null;
-    // private final String USER_DB = "UserDB";
-
-    //private Cursor cursor;
 
     private FrameLayout progressBar;
     private String token = null, user, emailAddy;

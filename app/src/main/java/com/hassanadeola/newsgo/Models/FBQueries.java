@@ -28,7 +28,7 @@ public class FBQueries {
     public FBQueries(Context context, String token) {
         this.context = context;
         this.token = token;
-        userFBInfo = new UserFBInfo();
+
 
         firebaseDatabase = FirebaseDatabase.getInstance();
 
@@ -39,25 +39,18 @@ public class FBQueries {
     }
 
     public void addLoginInfo(String username, String email, boolean isJoined) {
+        userFBInfo = new UserFBInfo();
         userFBInfo.setUsername(username);
         userFBInfo.setEmail(email);
         userFBInfo.setToken(token);
-        userFBInfo.setOs("android");
-        userFBInfo.setPushNotify(false);
-        userFBInfo.setEmailNotify(false);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                // inside the method of on Data change we are setting
-                // our object class to our database reference.
-                // data base reference will sends data to firebase.
                 databaseReference.setValue(userFBInfo);
-                // after adding this data we are showing toast message.
-                // Toast.makeText(context, "data added", Toast.LENGTH_SHORT).show();
-                SQLQueries newQueries = new SQLQueries(context);
-                newQueries.addUser(username, email, token);
 
                 if (isJoined) {
+                    SQLQueries newQueries = new SQLQueries(context);
+                    newQueries.addUser(username, email, token);
                     Toast.makeText(context, "Sign up Successful!", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -70,6 +63,32 @@ public class FBQueries {
 
                 AlertDialog.Builder builder = createAlertDialog(context, "Signup Error",
                         "An Error Occurred but you can continue to use this App. You can always sign up later. We got you!");
+                builder.setPositiveButton("OK", (dialogInterface, i) -> dialogInterface.dismiss());
+                builder.show();
+            }
+
+        });
+
+    }
+
+    public void updateSettings(boolean isActive, String settings) {
+        userFBInfo = new UserFBInfo();
+        if (settings.equalsIgnoreCase("emailNotify")) {
+            userFBInfo.setEmailNotify(isActive);
+        } else {
+            userFBInfo.setPushNotify(isActive);
+        }
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                databaseReference.setValue(userFBInfo);
+                Toast.makeText(context, "Settings updated", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                AlertDialog.Builder builder = createAlertDialog(context, "Update Error",
+                        "There was an error updating your settings. Please try again later");
                 builder.setPositiveButton("OK", (dialogInterface, i) -> dialogInterface.dismiss());
                 builder.show();
             }

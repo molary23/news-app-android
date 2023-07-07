@@ -1,83 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SettingsActivity"
-    android:orientation="vertical"
-    android:weightSum="4">
+    tools:context=".SettingsActivity">
 
-    <GridLayout
+
+    <FrameLayout
+        android:id="@+id/settings_container"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/sm"
-        android:padding="@dimen/xl"
-        android:layout_marginBottom="@dimen/xl">
+        android:layout_height="match_parent" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/xtitle"
-            android:id="@+id/username"
-            android:shadowColor="@color/gray" />
-    </GridLayout>
-
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/sm"
-        android:padding="@dimen/xl">
-
-        <TextView
-            android:id="@+id/push_notification"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/xtitle"
-            tools:text="@string/settings_push"
-            android:shadowColor="@color/gray" />
-    </GridLayout>
-
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/sm"
-        android:padding="@dimen/xl">
-
-        <TextView
-            android:id="@+id/email_notification"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/xtitle"
-            tools:text="@string/settings_email"
-            android:shadowColor="@color/gray" />
-    </GridLayout>
-
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/sm"
-        android:padding="@dimen/xl"
-        android:layout_marginBottom="@dimen/xl">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/xtitle"
-            android:id="@+id/themes"
-            android:shadowColor="@color/gray" />
-    </GridLayout>
-
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/sm"
-        android:padding="@dimen/xl"
-
-        >
-
-        <TextView
-            android:id="@+id/about"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/xtitle"
-            tools:text="@string/settings_about"
-            android:shadowColor="@color/gray" />
-    </GridLayout>
-
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
