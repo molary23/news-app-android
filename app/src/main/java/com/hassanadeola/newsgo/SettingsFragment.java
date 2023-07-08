@@ -1,26 +1,32 @@
 package com.hassanadeola.newsgo;
 
+import static com.hassanadeola.newsgo.utils.Functions.instantThemeChange;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
 import androidx.preference.SwitchPreference;
 
 import com.hassanadeola.newsgo.Models.FBQueries;
+import com.hassanadeola.newsgo.Models.SQLQueries;
 
 public class SettingsFragment extends PreferenceFragmentCompat implements Preference.OnPreferenceChangeListener {
+
     ListPreference themes;
     SwitchPreference push_notify, email_notify;
 
     SharedPreferences sharedPreferences;
 
-    String token;
+    String uuid = null, theme = null;
 
     FBQueries fbQueries;
+
+    String sqlId = null;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -28,38 +34,45 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Prefer
 
         sharedPreferences = requireActivity()
                 .getSharedPreferences("userPreference", Context.MODE_PRIVATE);
-        token = sharedPreferences.getString("token", "");
+        uuid = sharedPreferences.getString("token", "");
+        theme = sharedPreferences.getString("theme", "");
 
-        fbQueries = new FBQueries(getActivity(), token);
+        SQLQueries newQuery = new SQLQueries(requireActivity());
+        sqlId = newQuery.getUUID();
 
+        fbQueries = new FBQueries(getActivity(), uuid);
 
-        push_notify = findPreference("pref_push_val");
-        email_notify = findPreference("pref_email_val");
         themes = findPreference("pref_theme_val");
 
-        email_notify.setOnPreferenceChangeListener(this);
-        push_notify.setOnPreferenceChangeListener(this);
+        if (theme != null) {
+            themes.setValue(theme);
+            themes.setSummary(theme);
+
+        }
+
+        if (sqlId != null) {
+            push_notify = findPreference("pref_push_val");
+            email_notify = findPreference("pref_email_val");
+            email_notify.setVisible(true);
+            push_notify.setVisible(true);
+        }
+
+
+        DataStore dataStore = new DataStore(requireActivity());
+        PreferenceManager preferenceManager = getPreferenceManager();
+        preferenceManager.setPreferenceDataStore(dataStore);
+
         themes.setOnPreferenceChangeListener(this);
-
-
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        String preferenceKey = preference.getKey();
-        boolean isActive;
-        if (preferenceKey.equalsIgnoreCase("pref_push_val")) {
-            isActive = (Boolean) newValue;
-            // fbQueries.updateSettings(isActive, "pushNotify");
-            Toast.makeText(requireActivity(), "Settings updated", Toast.LENGTH_LONG).show();
-        } else if (preferenceKey.equalsIgnoreCase("pref_email_val")) {
-            isActive = (Boolean) newValue;
-            //   fbQueries.updateSettings(isActive, "emailNotify");
-            Toast.makeText(requireActivity(), "Settings updated 1", Toast.LENGTH_LONG).show();
-        } else {
-            // Add Theme to shared preferences
+        String preferenceKey = preference.getKey(),
+                themeValue = String.valueOf(newValue);
+        if (preferenceKey.equalsIgnoreCase("pref_theme_val")) {
+            themes.setSummary(themeValue);
+            instantThemeChange(themeValue);
         }
         return true;
     }
-
 }

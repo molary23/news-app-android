@@ -8,4 +8,11 @@
         <item name="android:background">@color/black_overlay</item>
         <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>
     </style>
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="iconTint">?attr/colorControlNormal</item>
+        <item name="android:buttonTint">@color/white</item>
+        <item name="android:background">@color/black_overlay</item>
+    </style>
 </resources>

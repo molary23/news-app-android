@@ -35,6 +35,9 @@ public class BookmarkActivity extends AppCompatActivity implements BookmarkListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Functions.changeTheme(this);
+
         setContentView(R.layout.activity_bookmark);
 
         progressBar = findViewById(R.id.progressBar);

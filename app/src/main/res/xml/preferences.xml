@@ -7,16 +7,17 @@
             android:defaultValue="false"
             android:key="@string/pref_push_val"
             android:title="@string/settings_push"
-
             app:icon="@drawable/outline_notifications_active_24"
-            android:summary="@string/settings_push_summary"/>
+            android:summary="@string/settings_push_summary"
+            app:isPreferenceVisible="false"/>
 
         <SwitchPreference
             android:defaultValue="false"
             android:key="@string/pref_email_val"
             android:summary="@string/settings_email_summary"
             android:title="@string/settings_email"
-            app:icon="@drawable/outline_mark_email_unread_24" />
+            app:icon="@drawable/outline_mark_email_unread_24"
+            app:isPreferenceVisible="false"/>
 
         <ListPreference
             android:defaultValue="Light"

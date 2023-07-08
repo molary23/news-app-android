@@ -9,11 +9,11 @@ import java.util.List;
 
 public class SQLQueries {
     private SQLiteDatabase db = null;
-    private final String USER_DB = "UserDB";
 
     private Cursor cursor;
 
     public SQLQueries(Context context) {
+        String USER_DB = "UserDB";
         db = context.openOrCreateDatabase(USER_DB, Context.MODE_PRIVATE, null);
     }
 
@@ -57,11 +57,8 @@ public class SQLQueries {
 
         if (cursor != null) // if there is a table
         {
-            if (cursor.getCount() <= 0) // if there are no records
+            if (cursor.getCount() > 0) // if there are no records
             {
-
-                isBookmarked = false;
-            } else {
                 isBookmarked = true;
             }
         }
@@ -73,8 +70,29 @@ public class SQLQueries {
         return db.delete("bookmarks", "bookId = ?", where) > 0;
     }
 
-    public void addUser(String username, String email, String token) {
-        db.execSQL("INSERT INTO users (username, email, token) Values ( '" + username + "', '" + email + "', '" + token + "');");
+    public void addUser(String username, String email, String uuid) {
+        db.execSQL("INSERT INTO users (username, email, uuid) Values ( '" + username + "', '" + email + "', '" + uuid + "');");
     }
 
+    public String getUUID() {
+        String uuid = null;
+        cursor = db.rawQuery("SELECT uuid FROM users", null);
+        if (cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
+                uuid = cursor.getString(0);
+            }
+        }
+        return uuid;
+    }
+
+    public String getEmail() {
+        String email = null;
+        cursor = db.rawQuery("SELECT email FROM users", null);
+        if (cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
+                email = cursor.getString(0);
+            }
+        }
+        return email;
+    }
 }

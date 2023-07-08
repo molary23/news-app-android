@@ -24,6 +24,9 @@ public class WebActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Functions.changeTheme(this);
+
         setContentView(R.layout.activity_web);
 
         webView = findViewById(R.id.webView);

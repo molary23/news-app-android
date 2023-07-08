@@ -32,6 +32,9 @@ public class DetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Functions.changeTheme(this);
+
         setContentView(R.layout.activity_details);
 
         headlines = (NewsHeadlines) getIntent().getSerializableExtra("data");
@@ -65,7 +68,7 @@ public class DetailsActivity extends AppCompatActivity {
         fab_browser.setOnClickListener((View view) -> {
             startActivity(new Intent(DetailsActivity.this, WebActivity.class).putExtra("link", headlines.getUrl()));
         });
-        
+
         fab_bookmark.setOnClickListener((View view) -> bookmarkPost(headlines));
 
 

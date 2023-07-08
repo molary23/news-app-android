@@ -23,6 +23,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.hassanadeola.newsgo.Models.FBQueries;
+import com.hassanadeola.newsgo.utils.Functions;
+
+import java.util.UUID;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText username, email;
@@ -34,13 +37,18 @@ public class LoginActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
+    String uuid;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Functions.changeTheme(this);
+
         setContentView(R.layout.activity_login);
 
-        // db = this.openOrCreateDatabase(USER_DB, MODE_PRIVATE, null);
+        uuid = String.valueOf(UUID.randomUUID());
 
         sharedPreferences = getSharedPreferences("userPreference", MODE_PRIVATE);
         editor = sharedPreferences.edit();
@@ -120,21 +128,16 @@ public class LoginActivity extends AppCompatActivity {
                     "You can always sign up later in the Settings Page");
             builder.setPositiveButton("Skip", (dialogInterface, i) -> {
                 dialogInterface.dismiss();
-                FBQueries fbQueries = new FBQueries(LoginActivity.this, token);
-                fbQueries.addLoginInfo(null, null, false);
-                addToken(null);
-                navToPage(MainActivity.class);
+                Intent startIntent = Functions.navToPage(this, MainActivity.class);
+                startActivity(startIntent);
             });
-            builder.setNegativeButton("Signup Now", (dialogInterface, i) -> dialogInterface.dismiss());
+            builder.setNegativeButton("Signup Now",
+                    (dialogInterface, i) -> dialogInterface.dismiss());
             builder.show();
         }
         return true;
     }
 
-    public void navToPage(Class<?> activityClass) {
-        Intent startIntent = new Intent(LoginActivity.this, activityClass);
-        startActivity(startIntent);
-    }
 
     public void addUser() {
         user = username.getText().toString().toLowerCase();
@@ -146,9 +149,9 @@ public class LoginActivity extends AppCompatActivity {
             builder.show();
         } else {
             toggleDisable(false);
-            FBQueries fbQueries = new FBQueries(this, token);
-            fbQueries.addLoginInfo(user, emailAddy, true);
-            addToken(user);
+            FBQueries fbQueries = new FBQueries(this, uuid);
+            fbQueries.addLoginInfo(user, emailAddy, token);
+            addToken(user, uuid);
             Intent startIntent = new Intent(LoginActivity.this, MainActivity.class);
             toggleDisable(true);
             startActivity(startIntent);
@@ -173,8 +176,9 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    public void addToken(String user) {
+    public void addToken(String user, String uuid) {
         editor.putString("token", token);
+        editor.putString("uuid", uuid);
         if (user != null) {
             editor.putString("username", user);
         }

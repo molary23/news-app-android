@@ -39,11 +39,15 @@ public class MainActivity extends AppCompatActivity implements SelectListener, V
 
     LinearLayout rootView;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Functions.changeTheme(this);
+
+
         setContentView(R.layout.activity_main);
+
 
         progressBar = findViewById(R.id.progressBar);
         btn_general = findViewById(R.id.btn_general);
@@ -105,7 +109,6 @@ public class MainActivity extends AppCompatActivity implements SelectListener, V
         super.onOptionsItemSelected(item);
         if (item.getItemId() == R.id.menu_bookmarks) {
             navToPage(BookmarkActivity.class);
-
         } else if (item.getItemId() == R.id.menu_settings) {
             navToPage(SettingsActivity.class);
         }
@@ -120,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements SelectListener, V
     @Override
     protected void onResume() {
         super.onResume();
-
+// Move focus to Body
         searchView.setQuery("", false);
         rootView.requestFocus();
     }

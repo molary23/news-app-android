@@ -8,49 +8,33 @@ import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.hassanadeola.newsgo.utils.Functions;
+
 public class SplashScreenActivity extends AppCompatActivity {
 
     private SQLiteDatabase db = null;
-    private final String USER_DB = "UserDB";
-
-    private Cursor cursor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Functions.changeTheme(this);
+
         setContentView(R.layout.activity_splash_screen);
 
+        String USER_DB = "UserDB";
         db = this.openOrCreateDatabase(USER_DB, MODE_PRIVATE, null);
 
-        Runnable runnable = new Runnable() {
-            public void run() {
-                dbSetup();
-            }
-        };
+        Runnable runnable = this::dbSetup;
 
         Handler handler = new android.os.Handler();
         handler.postDelayed(runnable, 5000);
-
-        //  handler.removeCallbacks(runnable);
-
-      /*  new android.os.Handler().postDelayed(
-                new Runnable() {
-                    public void run() {
-                        dbSetup();
-                    }
-                }, 5000);*/
-
-
     }
 
     public void dbSetup() {
-
-
-        ////////////////
-        // tblThing ///
         db.execSQL("CREATE TABLE IF NOT EXISTS users" +
                 " (userId INTEGER PRIMARY KEY AUTOINCREMENT," +
-                " token VARCHAR," +
+                " uuid VARCHAR," +
                 " username VARCHAR," +
                 " email VARCHAR," +
                 " createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP);");
@@ -63,7 +47,8 @@ public class SplashScreenActivity extends AppCompatActivity {
                 " createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP);");
 
 
-        cursor = db.rawQuery("SELECT username FROM users ORDER BY userId DESC", null);
+        Cursor cursor = db.rawQuery("SELECT username FROM users ORDER BY userId DESC",
+                null);
 
         if (cursor != null) // if there is a table
         {
@@ -74,10 +59,13 @@ public class SplashScreenActivity extends AppCompatActivity {
             } else {
                 navToPage(MainActivity.class);
             }
+            cursor.close();
         }
+
+
     }
 
-    public void navToPage(Class activityClass) {
+    public void navToPage(Class<?> activityClass) {
         Intent startIntent = new Intent(SplashScreenActivity.this, activityClass);
         startActivity(startIntent);
     }
