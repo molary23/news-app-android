@@ -1,10 +1,9 @@
 package com.hassanadeola.newsgo;
 
-import static com.hassanadeola.newsgo.utils.Functions.instantThemeChange;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
@@ -14,6 +13,8 @@ import androidx.preference.SwitchPreference;
 
 import com.hassanadeola.newsgo.Models.FBQueries;
 import com.hassanadeola.newsgo.Models.SQLQueries;
+
+import java.util.Objects;
 
 public class SettingsFragment extends PreferenceFragmentCompat implements Preference.OnPreferenceChangeListener {
 
@@ -44,8 +45,9 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Prefer
 
         themes = findPreference("pref_theme_val");
 
-        if (theme != null) {
-            themes.setValue(theme);
+
+        if (theme != null && !theme.isEmpty()) {
+            Objects.requireNonNull(themes).setValue(theme);
             themes.setSummary(theme);
 
         }
@@ -53,10 +55,9 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Prefer
         if (sqlId != null) {
             push_notify = findPreference("pref_push_val");
             email_notify = findPreference("pref_email_val");
-            email_notify.setVisible(true);
+            Objects.requireNonNull(email_notify).setVisible(true);
             push_notify.setVisible(true);
         }
-
 
         DataStore dataStore = new DataStore(requireActivity());
         PreferenceManager preferenceManager = getPreferenceManager();
@@ -71,7 +72,11 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Prefer
                 themeValue = String.valueOf(newValue);
         if (preferenceKey.equalsIgnoreCase("pref_theme_val")) {
             themes.setSummary(themeValue);
-            instantThemeChange(themeValue);
+            requireActivity().finish();
+            requireActivity().overridePendingTransition(0, 0);
+            startActivity(requireActivity().getIntent());
+            requireActivity().overridePendingTransition(0, 0);
+            Toast.makeText(requireActivity(), "Theme Changed", Toast.LENGTH_SHORT).show();
         }
         return true;
     }
