@@ -155,6 +155,7 @@ public class LoginActivity extends AppCompatActivity {
             Intent startIntent = new Intent(LoginActivity.this, MainActivity.class);
             toggleDisable(true);
             startActivity(startIntent);
+            finish();
         }
     }
 

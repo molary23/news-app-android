@@ -135,8 +135,8 @@ public class MainActivity extends AppCompatActivity implements SelectListener, V
                     if (list.isEmpty()) {
                         Toast.makeText(MainActivity.this, "Data not available",
                                 Toast.LENGTH_SHORT).show();
+                        toggleDisable(true);
                     } else {
-
                         showNews(list);
                         toggleDisable(true);
 

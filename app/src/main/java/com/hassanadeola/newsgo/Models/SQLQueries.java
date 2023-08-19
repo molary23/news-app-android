@@ -20,8 +20,9 @@ public class SQLQueries {
     public boolean addBookmark(String postTitle, String postSource, String postUrl, String postImage) {
         boolean isBookmarked = isBookmarked(new String[]{postTitle, postSource});
         if (!isBookmarked) {
+
             db.execSQL("INSERT INTO bookmarks (postTitle, postSource,postUrl, postImage) " +
-                    "Values ( '" + postTitle + "','" + postSource + "', '" + postUrl + "', '" + postImage + "');");
+                    "Values ( \"" + postTitle + "\",\"" + postSource + "\", \"" + postUrl + "\", \"" + postImage + "\");");
             return true;
         } else {
             return false;
@@ -71,7 +72,7 @@ public class SQLQueries {
     }
 
     public void addUser(String username, String email, String uuid) {
-        db.execSQL("INSERT INTO users (username, email, uuid) Values ( '" + username + "', '" + email + "', '" + uuid + "');");
+        db.execSQL("INSERT INTO users (username, email, uuid) Values ( \"" + username + "\", \"" + email + "\", \"" + uuid + "\");");
     }
 
     public String getUUID() {
